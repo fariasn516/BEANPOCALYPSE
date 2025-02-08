@@ -1,38 +1,101 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, Typography, Box } from '@mui/material';
+import { styled } from '@mui/system';
+
+// Styled components for modern and responsive design
+const FullWidthCard = styled(Card)({
+  width: '100%',
+  margin: '10px auto', // Centers the card
+  borderRadius: '16px', 
+  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
+});
+
+const ScrollContainer = styled(Box)({
+  maxHeight: '300px', // Adjust height as needed
+  overflowY: 'auto',
+  padding: '10px',
+});
 
 export default function AwaitingBattle() {
-  const navigate = useNavigate();
+  const playerData = [
+    { role: 'DRIVER', atkDmg: 1, killCount: 20 },
+    { role: 'SCREENAGER', atkDmg: 10, killCount: 20 },
+    { role: 'SLEEPER', atkDmg: 15, killCount: 5 },
+  ];
 
   return (
-    <div className="flex flex-col h-full p-6">
-      <div className="bg-gray-100 p-4 rounded mb-6">
-        <p className="font-medium">Destination address</p>
-        <div className="flex justify-between mt-2">
-          <div>
-            <p className="text-sm">Time:</p>
-            <p>5:00</p>
-          </div>
-          <div>
-            <p className="text-sm">Distance:</p>
-            <p>1000</p>
-          </div>
-        </div>
-      </div>
+    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+      {/* Destination Section */}
+      <FullWidthCard>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+            Destination Address
+          </Typography>
+          <Box display="flex" justifyContent="space-between" mt={2}>
+            <Box>
+              <Typography variant="body2" color="textSecondary">
+                Time:
+              </Typography>
+              <Typography>5:00</Typography>
+            </Box>
+            <Box>
+              <Typography variant="body2" color="textSecondary">
+                Distance:
+              </Typography>
+              <Typography>1000</Typography>
+            </Box>
+          </Box>
+        </CardContent>
+      </FullWidthCard>
 
-      <div className="flex-grow">
-        <h2 className="text-xl mb-4">BEANMOBILE</h2>
-        <div className="space-y-4">
-          {['DRIVER', 'SCREENAGER', 'SLEEPER'].map(role => (
-            <div key={role} className="bg-gray-100 p-4 rounded">
-              <p>[PLAYER NAME]</p>
-              <p>{role}</p>
-              <p>ATK DMG: 1</p>
-              <p>KILL COUNT: 20</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+      {/* Beanmobile Section */}
+      <FullWidthCard sx={{ backgroundColor: '#ffe4c4' }}>
+        <CardContent>
+          <Typography
+            variant="h5"
+            sx={{
+              fontWeight: 'bold',
+              textAlign: 'center',
+              color: '#d2691e',
+            }}
+          >
+            BEANMOBILE
+          </Typography>
+        </CardContent>
+      </FullWidthCard>
+
+      {/* Scrollable Player Stats */}
+      <FullWidthCard>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Player Stats
+          </Typography>
+
+          <ScrollContainer>
+            {playerData.map((player, index) => (
+              <Card
+                key={index}
+                sx={{
+                  mb: 2,
+                  p: 2,
+                  borderRadius: '12px',
+                  backgroundColor: '#f0f8ff',
+                  boxShadow: '0px 2px 8px rgba(0,0,0,0.1)',
+                }}
+              >
+                <CardContent>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                    [PLAYER NAME]
+                  </Typography>
+                  <Typography variant="body2">{player.role}</Typography>
+                  <Typography variant="body2">ATK DMG: {player.atkDmg}</Typography>
+                  <Typography variant="body2">KILL COUNT: {player.killCount}</Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </ScrollContainer>
+        </CardContent>
+      </FullWidthCard>
+    </Box>
   );
 }
