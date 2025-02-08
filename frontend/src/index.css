@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 360px;
+  height: 640px;
+  border: solid 2px black;
+  margin: auto;
+}
+
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1, h2, p, button {
+  color: black; 
+}
