@@ -36,13 +36,8 @@ public class GameController {
 
     // API for upgrading attack power
     @PostMapping("/upgradeAttackPower")
-    public void upgradeAttackPower() {
-        gameState.upgradeAttackPower();
-    }
-
-    @GetMapping("/isGameOver")
-    public boolean isGameOver() {
-        return gameState.isGameOver();
+    public void upgradeAttackPower(@RequestParam String playerName) {
+        gameState.upgradeAttackPower(playerName);
     }
 
     // returns structured game state for React frontend
