@@ -4,7 +4,7 @@ import { styled } from '@mui/system';
 
 // Styled components for modern and responsive design
 const FullWidthCard = styled(Card)({
-  width: '100%',
+  width: '320px',
   margin: '10px auto', // Centers the card
   borderRadius: '16px', 
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
@@ -24,7 +24,7 @@ export default function AwaitingBattle() {
   ];
 
   return (
-    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh'}}>
       {/* Destination Section */}
       <FullWidthCard>
         <CardContent>
