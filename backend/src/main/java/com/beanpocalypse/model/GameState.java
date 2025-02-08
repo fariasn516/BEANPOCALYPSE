@@ -83,8 +83,9 @@ public class GameState {
     }
 
     private void progressTrip() {
-        if (!gameStarted || milesRemaining <= 0) return;
-        
+        if (!gameStarted || milesRemaining <= 0)
+            return;
+
         milesRemaining--;
 
         // random zombie battle (20% chance every 10 seconds)
@@ -92,19 +93,17 @@ public class GameState {
             startBattle();
         }
 
-        // rest stops every 10 miles
         if (milesRemaining % 10 == 0) {
             restStopRegen();
         }
 
-        // final boss appears at 0 miles
         if (milesRemaining == 0 && !finalBossActive) {
             startFinalBoss();
         }
     }
 
     private void restStopRegen() {
-        this.tankHealth = this.maxTankHealth; 
+        this.tankHealth = this.maxTankHealth;
     }
 
     public void startBattle() {
@@ -123,7 +122,7 @@ public class GameState {
         }
 
         if (isAttack) {
-            resolveAttack(10); 
+            resolveAttack(10);
         }
     }
 
@@ -180,18 +179,35 @@ public class GameState {
             tankPoints -= UPGRADE_COST;
             maxTankHealth += 20;
             tankHealth = maxTankHealth;
+        }
     }
-}
 
-    public void upgradeAttackPower() {
+    public void upgradeAttackPower(String playerName) {
         int UPGRADE_COST = 20;
-        if (tankPoints >= UPGRADE_COST) {
-            tankPoints -= UPGRADE_COST;
-            for (Backseater backseater : backseaters) {
+        if (tankPoints < UPGRADE_COST) {
+            throw new IllegalStateException("Not enough tank points!");
+        }
+
+        boolean upgraded = false;
+
+        if (driver != null && driver.getName().equals(playerName)) {
+            driver.boostAttackPower(5);
+            upgraded = true;
+        }
+
+        for (Backseater backseater : backseaters) {
+            if (backseater.getName().equals(playerName)) {
                 backseater.boostAttackPower(5);
+                upgraded = true;
             }
+        }
+
+        if (upgraded) {
+            tankPoints -= UPGRADE_COST;
+        } else {
+            throw new IllegalArgumentException("Player not found!");
+        }
     }
-}
 
     public boolean isGameOver() {
         return tankHealth <= 0 || (finalBossActive && finalBoss.isDefeated());
@@ -203,12 +219,11 @@ public class GameState {
 
     public GameStateDTO getGameState() {
         return new GameStateDTO(
-            milesRemaining, tankHealth, maxTankHealth, tankPoints,
-            battleActive, finalBossActive, gameStarted,
-            driver != null ? driver.getName() : null,
-            backseaters,
-            battleActive && currentZombie != null ? currentZombie.getHealth() : null,
-            finalBossActive && finalBoss != null ? finalBoss.getHealth() : null
-        );
+                milesRemaining, tankHealth, maxTankHealth, tankPoints,
+                battleActive, finalBossActive, gameStarted,
+                driver != null ? driver.getName() : null,
+                backseaters,
+                battleActive && currentZombie != null ? currentZombie.getHealth() : null,
+                finalBossActive && finalBoss != null ? finalBoss.getHealth() : null);
     }
 }
