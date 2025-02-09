@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, Button, LinearProgress } from '@mui/material';
 import { styled } from '@mui/system';
-import enemyImage from '../final assets/zombean.gif'; 
+import enemyImage from '../final assets/bakedbeans.gif'; 
 import playerImage from '../final assets/sleeper.gif'; 
 import fightImage from '../final assets/fightbutton.png'; 
 import blockImage from '../final assets/blockbutton.png'; 

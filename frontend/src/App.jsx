@@ -7,6 +7,8 @@ import CharacterSelection from './components/CharacterSelection';
 import AwaitingBattle from './components/AwaitingBattle';
 import DuringBattle from './components/DuringBattle';
 import RestStop from './components/RestStop';
+import FinalBattle from './components/FinalBattle';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
             <Route path="/during-battle" element={<DuringBattle />} />
             <Route path="/rest-stop" element={<RestStop />} />
             <Route path="/driver-screen" element={<DriverScreen />} />
+            <Route path="/final-battle" element={<FinalBattle />} />
           </Routes>
         </PhoneScreen>
       </GameProvider>
