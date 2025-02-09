@@ -1,11 +1,15 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
+import beanmobileImage from '../final assets/beanmobile.gif'; 
+import beanbuckImage from '../final assets/beanbuck.png'; 
+import heartIconImage from '../final assets/hearticon.png'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const FullWidthCard = styled(Card)({
   width: '320px',
-  margin: '10px auto', 
-  borderRadius: '16px', 
+  margin: '10px auto',
+  borderRadius: '16px',
   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
   transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
   cursor: 'pointer',
@@ -17,27 +21,6 @@ const FullWidthCard = styled(Card)({
   },
 });
 
-const ScrollContainer = styled(Box)({
-  maxHeight: '300px',
-  overflowY: 'auto',
-  padding: '10px',
-  scrollbarColor: '#444 #888',
-  '&::-webkit-scrollbar': {
-    width: '8px',
-  },
-  '&::-webkit-scrollbar-track': {
-    background: 'rgba(255,255,255,0.1)',
-    borderRadius: '4px',
-  },
-  '&::-webkit-scrollbar-thumb': {
-    background: 'rgba(255,255,255,0.2)',
-    borderRadius: '4px',
-    '&:hover': {
-      background: 'rgba(255,255,255,0.3)',
-    },
-  },
-});
-
 const GradientBackground = styled(Box)({
   minHeight: '100vh',
   background: 'linear-gradient(180deg, #000000 0%, #4A148C 100%)',
@@ -45,10 +28,18 @@ const GradientBackground = styled(Box)({
 });
 
 export default function AwaitingBattle() {
+  const navigate = useNavigate(); // Hook to navigate pages
+
+  const handleCardClick = () => {
+    navigate('/during-battle'); // Redirects to During Battle page
+  };
+
   const playerData = [
-    { role: 'DRIVER', atkDmg: 1, killCount: 20 },
-    { role: 'SCREENAGER', atkDmg: 10, killCount: 20 },
-    { role: 'SLEEPER', atkDmg: 15, killCount: 5 },
+    { name: 'Alex', role: 'DRIVER', atkDmg: 1, killCount: 20 },
+    { name: 'Jamie', role: 'SCREENAGER', atkDmg: 10, killCount: 20 },
+    { name: 'Taylor', role: 'SLEEPER', atkDmg: 15, killCount: 5 },
+    { name: 'Jordan', role: 'SNACKER', atkDmg: 8, killCount: 10 }, 
+    { name: 'Riley', role: 'NAVIGATOR', atkDmg: 5, killCount: 12 }  
   ];
 
   return (
@@ -60,7 +51,7 @@ export default function AwaitingBattle() {
         </Typography>
 
         {/* Destination Section */}
-        <FullWidthCard>
+        <FullWidthCard onClick={handleCardClick}> 
           <CardContent>
             <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center', color: 'white' }}>
               Destination Address
@@ -82,32 +73,53 @@ export default function AwaitingBattle() {
           </CardContent>
         </FullWidthCard>
 
-        {/* Beanmobile Section */}
-        <FullWidthCard sx={{
-          background: 'linear-gradient(45deg, #4A148C 30%, #7B1FA2 90%)',
-        }}>
-          <CardContent>
-            <Typography
-              variant="h5"
-              sx={{
-                fontWeight: 'bold',
-                textAlign: 'center',
-                color: 'white',
-              }}
-            >
-              BEANMOBILE
-            </Typography>
-          </CardContent>
-        </FullWidthCard>
+        {/* Beanmobile + Icons Section */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 2 }}>
+          {/* Icons and Labels on the Left */}
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', mr: 2 }}>
+            {/* BeanBuck Icon with Text */}
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+              <img 
+                src={beanbuckImage} 
+                alt="BeanBuck" 
+                style={{ width: '50px', height: '50px', marginRight: '8px' }} 
+              />
+              <Typography variant="body2" sx={{ color: 'white', fontWeight: 'bold' }}>
+                1000
+              </Typography>
+            </Box>
+
+            {/* Heart Icon with Text */}
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <img 
+                src={heartIconImage} 
+                alt="Heart Icon" 
+                style={{ width: '50px', height: '50px', marginRight: '8px' }} 
+              />
+              <Typography variant="body2" sx={{ color: 'white', fontWeight: 'bold' }}>
+                570 / 600
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* Beanmobile on the Right */}
+          <Box>
+            <img 
+              src={beanmobileImage} 
+              alt="Beanmobile" 
+              style={{ width: '120px', height: '120px', display: 'block' }} 
+            />
+          </Box>
+        </Box>
 
         {/* Scrollable Player Stats */}
-        <FullWidthCard>
+        <FullWidthCard sx={{ mt: 2 }}>
           <CardContent>
             <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
               Player Stats
             </Typography>
 
-            <ScrollContainer>
+            <Box sx={{ maxHeight: '400px', overflowY: 'auto', padding: '10px' }}>
               {playerData.map((player, index) => (
                 <Card
                   key={index}
@@ -121,7 +133,7 @@ export default function AwaitingBattle() {
                 >
                   <CardContent>
                     <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'white' }}>
-                      [PLAYER NAME]
+                      {player.name} {/* Hardcoded Player Names */}
                     </Typography>
                     <Typography variant="body2" color="rgba(255,255,255,0.7)">{player.role}</Typography>
                     <Typography variant="body2" color="rgba(255,255,255,0.7)">ATK DMG: {player.atkDmg}</Typography>
@@ -129,7 +141,7 @@ export default function AwaitingBattle() {
                   </CardContent>
                 </Card>
               ))}
-            </ScrollContainer>
+            </Box>
           </CardContent>
         </FullWidthCard>
       </Box>
