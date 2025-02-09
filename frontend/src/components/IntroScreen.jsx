@@ -45,7 +45,6 @@ export default function IntroScreen() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Buttons at the Bottom*/}
       <ButtonContainer>
         <StartButton onClick={() => console.log('Game Started!')}>
           START
