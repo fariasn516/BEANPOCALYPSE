@@ -68,15 +68,15 @@ This game blends **driving mechanics and cooperative strategy** into a fun road 
 - **Node.js & React** 
 
 ### Running the Backend
-
 ```sh
 cd backend
 ./mvnw clean package
 ./mvnw spring-boot:run
+```
 
 ### Running the Frontend
-
 ```sh
 cd frontend
 npm install 
 npm start
+```
