@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
@@ -33,11 +34,17 @@ const SpeedCard = styled(FullWidthCard)({
 });
 
 export default function DriverLockScreen() {
+  const navigate = useNavigate()
+
+  const handleButtonClick = () => {
+    navigate('/rest-stop')
+  }
+
   return (
     <GradientBackground>
       <Box sx={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
         {/* Warning Message */}
-        <WarningCard>
+        <WarningCard onClick={handleButtonClick}>
           <CardContent sx={{ p: 4 }}>
             <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#ff1744' }}>
               DO NOT USE WHILE DRIVING

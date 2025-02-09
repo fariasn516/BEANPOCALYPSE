@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Box } from '@mui/material';
 import { styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 import backgroundImage from '../final assets/IntroPage.webp'; 
 import startButtonImage from '../final assets/startbutton.png'; 
 import hostButtonImage from '../final assets/hostbutton.png'; 
@@ -35,6 +36,12 @@ const HostButton = styled(ImageButton)({
 });
 
 export default function IntroScreen() {
+  const navigate = useNavigate()
+
+  const handleButtonClick = () => {
+    navigate('/character-selection')
+  }
+
   return (
     <Box
       sx={{
@@ -46,10 +53,10 @@ export default function IntroScreen() {
       }}
     >
       <ButtonContainer>
-        <StartButton onClick={() => console.log('Game Started!')}>
+        <StartButton onClick={handleButtonClick}>
           START
         </StartButton>
-        <HostButton onClick={() => console.log('Hosting Game!')}>
+        <HostButton onClick={handleButtonClick}>
           HOST GAME
         </HostButton>
       </ButtonContainer>

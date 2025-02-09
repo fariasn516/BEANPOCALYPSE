@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, Typography, Box, Button, TextField } from '@mui/material';
 import { styled } from '@mui/system';
+import logo from '../final assets/beanmobile.gif'
+import driver from '../final assets/driver.gif'
+import screenager from '../final assets/screenager.gif'
+import sleeper from '../final assets/sleeper.gif'
+import singer from '../final assets/singer.gif'
+import snacker from '../final assets/snacker.gif'
 
 const ScrollContainer = styled(Box)({
   maxHeight: '100vh',
   overflowY: 'auto',
   scrollbarColor: '#444 #888',
-  paddingBottom: '20px',
+  paddingBottom: '100px',
   '&::-webkit-scrollbar': {
     width: '8px',
   },
@@ -87,7 +93,7 @@ export default function CharacterSelection() {
   const [gameState, setGameState] = useState({
     gameCode: "HBP2025",
     destination: "",
-    distanceRemaining: "500 miles away",
+
     driver: { name: "Nancy" },
     backseaters: [
       { name: "Player 1", role: "snacker" },
@@ -169,63 +175,71 @@ export default function CharacterSelection() {
             </CardContent>
           </DestinationCard>
 
-          {/* Tank */}
-          <FullWidthCard sx={{
-            background: 'linear-gradient(45deg, #4A148C 30%, #7B1FA2 90%)',
-          }}>
-            <CardContent sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
-                FUEL TANK
-              </Typography>
-            </CardContent>
-          </FullWidthCard>
+        {/* Fuel Tank GIF */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1}}>
+      <img src={logo} alt="loading..." style={{
+      width: '150px', 
+      height: 'auto', 
+      maxWidth: '100%', 
+    }}/>
+      </Box>
 
           {/* Start Button */}
           <StyledButton onClick={handleStartGame}>
             START THE JOURNEY
           </StyledButton>
 
-          {/* Driver */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <PlayerCard
-              isDriver
-              onClick={() => handleNavigation('driver')}
-            >
-              <CardContent sx={{ textAlign: 'center' }}>
-                <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'white' }}>
-                  {gameState.driver.name}
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-                  Driver
-                </Typography>
-              </CardContent>
-            </PlayerCard>
-          </Box>
+          {/* Driver (Clickable GIF with Name) */}
+<Box 
+  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2, cursor: 'pointer' }}
+  onClick={() => navigate('/driver-screen')} // Navigate on click
+>
+  <img 
+    src={driver} 
+    alt="Driver" 
+    style={{ width: '100px', height: 'auto', maxWidth: '100%' }} 
+  />
+  <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'white', mt: 1, fontSize: '0.9rem' }}>
+    Driver
+  </Typography>
+</Box>
+          {/* Backseat Players (GIFs in a Row) */}
+{/* Backseat Players (Centered & Aligned Properly) */}
+<Box sx={{
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  gap: 2,  // Adjust spacing
+  mt: 2,
+  width: '100%',  // Ensure it stretches across the container
+  maxWidth: '400px',  // Prevent too wide overflow
+  margin: '0 auto',  // Centering the whole row
+  flexWrap: 'wrap', // Allows wrapping for small screens
+}}>
+  {[ 
+    { name: "Screenager", gif: screenager }, 
+    { name: "Sleeper", gif: sleeper }, 
+    { name: "Snacker", gif: snacker },
+    { name: "Singer", gif: singer }
+  ].map((player, index) => (
+    <Box key={index} sx={{
+      textAlign: 'center',
+      flex: '1 1 25%', // Ensures even spacing
+      maxWidth: '100px', // Limits width of each player box
+      minWidth: '80px'  // Prevents being too small
+    }}>
+      <img 
+        src={player.gif} 
+        alt={player.name} 
+        style={{ width: '80px', height: 'auto', borderRadius: '12px' }} 
+      />
+      <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'white', mt: 1, fontSize: '0.9rem' }}>
+        {player.name}
+      </Typography>
+    </Box>
+  ))}
+</Box>
 
-          {/* Backseat Players */}
-          <Box sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: 2,
-            mt: 2
-          }}>
-            {gameState.backseaters.map((player, index) => (
-              <PlayerCard
-                key={index}
-                onClick={() => handleNavigation(player.role)}
-              >
-                <CardContent sx={{ textAlign: 'center' }}>
-                  <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'white' }}>
-                    {player.name}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)', textTransform: 'capitalize' }}>
-                    {player.role}
-                  </Typography>
-                </CardContent>
-              </PlayerCard>
-            ))}
-          </Box>
         </Box>
       </GradientBackground>
     </ScrollContainer>
