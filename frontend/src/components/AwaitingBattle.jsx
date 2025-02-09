@@ -28,18 +28,18 @@ const GradientBackground = styled(Box)({
 });
 
 export default function AwaitingBattle() {
-  const navigate = useNavigate(); // Hook to navigate pages
+  const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/during-battle'); // Redirects to During Battle page
+    navigate('/during-battle');
   };
 
   const playerData = [
-    { name: 'Alex', role: 'DRIVER', atkDmg: 1, killCount: 20 },
-    { name: 'Jamie', role: 'SCREENAGER', atkDmg: 10, killCount: 20 },
-    { name: 'Taylor', role: 'SLEEPER', atkDmg: 15, killCount: 5 },
-    { name: 'Jordan', role: 'SNACKER', atkDmg: 8, killCount: 10 }, 
-    { name: 'Riley', role: 'NAVIGATOR', atkDmg: 5, killCount: 12 }  
+    { name: 'Nancy', role: 'DRIVER', atkDmg: 1, killCount: 20 },
+    { name: 'Matthew', role: 'SCREENAGER', atkDmg: 10, killCount: 20 },
+    { name: 'Aayah', role: 'SLEEPER', atkDmg: 15, killCount: 5 },
+    { name: 'Amy', role: 'SNACKER', atkDmg: 8, killCount: 10 }, 
+    { name: 'Luis', role: 'SNACKER', atkDmg: 5, killCount: 12 }  
   ];
 
   return (

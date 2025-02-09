@@ -294,7 +294,7 @@ export default function RestStop() {
                     justifyContent: 'space-evenly',
                     alignItems: 'center',
                   }}>
-                      <Screenager></Screenager>>
+                      <Screenager></Screenager>
                       <Typography variant="subtitle1" sx={{ fontWeight: 'bold', color: 'white' }}>
                       Matthew<br></br>SCREENAGER
                     </Typography>

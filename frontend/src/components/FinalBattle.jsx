@@ -117,9 +117,9 @@ export default function DuringBattle() {
 
         <Box sx={{
   position: 'fixed',  
-  bottom: '180px',  // Moves it to the bottom
-  left: '550px',  // Aligns it to the left
-  zIndex: 3,  // Keeps it above other elements
+  bottom: '180px',  
+  left: '550px',  
+  zIndex: 3,  
 }}>
   <Player sx={{ height: '150px' }}></Player> 
 </Box>
