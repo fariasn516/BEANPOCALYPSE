@@ -2,16 +2,15 @@ import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
 
-// Styled components for modern and responsive design
 const FullWidthCard = styled(Card)({
-  width: '100%',
-  margin: '10px auto', // Centers the card
+  width: '320px',
+  margin: '10px auto', 
   borderRadius: '16px', 
-  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow for depth
+  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', 
 });
 
 const ScrollContainer = styled(Box)({
-  maxHeight: '300px', // Adjust height as needed
+  maxHeight: '300px', 
   overflowY: 'auto',
   padding: '10px',
 });
@@ -24,7 +23,13 @@ export default function AwaitingBattle() {
   ];
 
   return (
-    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh', textAlign: 'center' }}>
+      
+      {/* AWAITING BATTLE MESSAGE */}
+      <Typography variant="h5" sx={{ fontWeight: 'bold', color: '#d32f2f', mb: 2 }}>
+        AWAITING BATTLE...
+      </Typography>
+
       {/* Destination Section */}
       <FullWidthCard>
         <CardContent>

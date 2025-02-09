@@ -1,48 +1,107 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import CharacterCard from './CharacterCard';
+import { Card, CardContent, Typography, Box, Button, TextField } from '@mui/material';
+import { styled } from '@mui/system';
+
+const FullWidthCard = styled(Card)({
+  width: '100%',
+  margin: '5px auto',
+  borderRadius: '16px',
+  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+  textAlign: 'center',
+});
+
+const ScrollContainer = styled(Box)({
+  maxHeight: '100vh',
+  overflowY: 'auto',
+  paddingBottom: '20px', 
+});
 
 export default function CharacterSelection() {
-  const navigate = useNavigate();
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [gameState, setGameState] = useState({
+    gameCode: "HBP2025",
+    destination: "",
+    distanceRemaining: "500 miles away",
+    driver: { name: "Nancy" },
+    backseaters: [
+      { name: "Player 1", role: "snacker" },
+      { name: "Player 2", role: "singer" },
+      { name: "Player 3", role: "screenager" },
+      { name: "Player 4", role: "sleeper" },
+    ],
+  });
 
-  const handleRoleSelect = (role) => {
-    setSelectedRole(role);
+  const handleDestinationChange = (event) => {
+    setGameState((prevState) => ({
+      ...prevState,
+      destination: event.target.value,
+    }));
   };
 
-  const roles = ['driver', 'snacker', 'singer', 'screenager', 'sleeper'];
-
   return (
-    <div className="flex flex-col h-full p-6 bg-gradient-to-b from-yellow-300 to-orange-400 text-white">
-      <div className="bg-gray-800 p-4 rounded mb-6 shadow-lg">
-        <p className="text-sm mb-2">JOIN CODE: HFP2025</p>
-        <div className="bg-gray-700 p-4 rounded">
-          <p className="font-medium">Destination address</p>
-          <p className="text-sm">(DISTANCE AWAY)</p>
-        </div>
-      </div>
+    <ScrollContainer sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh', textAlign: 'center' }}>
+      {/* Game Code */}
+      <FullWidthCard sx={{ backgroundColor: '#ddd' }}>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            JOIN CODE: {gameState.gameCode}
+          </Typography>
+        </CardContent>
+      </FullWidthCard>
 
-      <div className="grid grid-cols-1 gap-4 mb-6 overflow-y-auto">
-        {roles.map(role => (
-          <CharacterCard
-            key={role}
-            role={role}
-            onSelect={handleRoleSelect}
+      {/* Editable Destination Field */}
+      <FullWidthCard sx={{ border: '2px solid green', p: 2 }}>
+        <CardContent>
+          <TextField
+            label="Destination Address"
+            variant="outlined"
+            fullWidth
+            value={gameState.destination}
+            onChange={handleDestinationChange}
+            sx={{ mb: 1 }}
           />
-        ))}
-      </div>
+          <Typography variant="body2" color="textSecondary">
+            {gameState.distanceRemaining}
+          </Typography>
+        </CardContent>
+      </FullWidthCard>
 
-      <button
-        onClick={() => navigate('/awaiting-battle')}
-        disabled={!selectedRole}
-        className={`p-4 rounded text-center mt-auto text-white font-bold shadow-md ${
-          selectedRole 
-            ? 'bg-red-500 hover:bg-red-600' 
-            : 'bg-gray-500 cursor-not-allowed'
-        }`}
-      >
-        START GAME
-      </button>
-    </div>
+      {/* Tank Placeholder */}
+      <FullWidthCard sx={{ backgroundColor: '#ddd' }}>
+        <CardContent>
+          <Typography variant="h6">TANK</Typography>
+        </CardContent>
+      </FullWidthCard>
+
+      {/* Start Button */}
+      <Button variant="contained" color="primary" sx={{ width: '100%', mt: 1, p: 2 }}>
+        START
+      </Button>
+
+      {/* Player Roles Display */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+        <FullWidthCard sx={{ maxWidth: '120px', backgroundColor: '#ddd' }}>
+          <CardContent>
+            <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+              {gameState.driver.name}
+            </Typography>
+            <Typography variant="body2">Driver</Typography>
+          </CardContent>
+        </FullWidthCard>
+      </Box>
+
+      {/* Backseat Players (Fixed Layout Issue) */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', mt: 2, gap: 1 }}>
+        {gameState.backseaters.map((player, index) => (
+          <FullWidthCard key={index} sx={{ maxWidth: '110px', backgroundColor: '#ddd', flex: '1 1 45%' }}>
+            <CardContent>
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                {player.name}
+              </Typography>
+              <Typography variant="body2">{player.role}</Typography>
+            </CardContent>
+          </FullWidthCard>
+        ))}
+      </Box>
+    </ScrollContainer>
   );
 }

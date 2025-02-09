@@ -1,0 +1,11 @@
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/BeanpocalypseApplication.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/config/WebConfig.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/controller/GameController.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/Backseater.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/Driver.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/Enemy.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/FinalBoss.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/GameState.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/GameStateDTO.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/Player.java
+/Users/nancyfarias/Desktop/BEANPOCALYPSE/backend/src/main/java/com/beanpocalypse/model/Zombie.java

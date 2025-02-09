@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GameProvider } from './context/GameContext';
 import PhoneScreen from './components/PhoneScreen';
 import DriverScreen from './components/DriverScreen';
-import SleeperScreen from './components/SleeperScreen';
 import IntroScreen from './components/IntroScreen';
 import CharacterSelection from './components/CharacterSelection';
 import AwaitingBattle from './components/AwaitingBattle';
@@ -15,12 +14,12 @@ function App() {
         <PhoneScreen>
           <Routes>
             <Route path="/driver" element={<DriverScreen />} />
-            <Route path="/sleeper" element={<SleeperScreen />} />
             <Route path="/" element={<IntroScreen />} />
             <Route path="/character-selection" element={<CharacterSelection />} />
             <Route path="/awaiting-battle" element={<AwaitingBattle />} />
             <Route path="/during-battle" element={<DuringBattle />} />
             <Route path="/rest-stop" element={<RestStop />} />
+            <Route path="/driver-screen" element={<DriverScreen />} />
           </Routes>
         </PhoneScreen>
       </GameProvider>

@@ -1,81 +1,119 @@
 import React from 'react';
-import { AlertCircle, Battery, Heart, User } from 'lucide-react';
+import { Card, CardContent, Typography, Box, Button } from '@mui/material';
+import { styled } from '@mui/system';
 
-const RestStop = () => {
-  const players = [
-    { role: 'DRIVER', currentHP: 600, maxHP: 1000, boost: 200 },
-    { role: 'SCREENAGER', currentHP: 450, maxHP: 800, boost: 150 },
-    { role: 'SLEEPER', currentHP: 700, maxHP: 1000, boost: 200 }
-  ];
+const FullWidthCard = styled(Card)({
+  width: '100%',
+  margin: '10px auto',
+  borderRadius: '16px',
+  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+});
 
-  const beanmobile = {
-    currentHP: 800,
-    maxHP: 1000,
-    boost: 100
+const ScrollContainer = styled(Box)({
+  maxHeight: '300px', 
+  overflowY: 'auto',
+  padding: '10px',
+});
+
+export default function RestStop() {
+  const gameState = {
+    milesRemaining: 20, 
+    tankPoints: 500, 
+    tankHealth: 300, 
+    maxTankHealth: 600,
+    driver: { name: "Nancy", role: "driver", attackPower: 1, killCount: 10 },
+    backseaters: [
+      { name: "Player 1", role: "screenager", attackPower: 10, killCount: 5 },
+      { name: "Player 2", role: "sleeper", attackPower: 15, killCount: 3 }
+    ]
   };
 
+  const driver = gameState.driver ? [gameState.driver] : [];
+  const backseaters = gameState.backseaters ? gameState.backseaters : [];
+
   return (
-    <div className="flex flex-col h-full p-6 bg-gradient-to-b from-teal-300 to-blue-400 text-white">
-      <div className="flex items-center gap-2 mb-4">
-        <AlertCircle className="w-6 h-6" />
-        <h2 className="text-2xl font-bold">REST STOP</h2>
-      </div>
+    <Box sx={{ p: 2, backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+      {/* Rest Stop Header */}
+      <FullWidthCard>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+            Rest Stop
+          </Typography>
+          <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
+            {gameState.milesRemaining} miles from destination
+          </Typography>
+        </CardContent>
+      </FullWidthCard>
 
-      <div className="bg-gray-800/80 rounded-lg p-4 mb-6">
-        <p className="text-sm text-gray-300">Distance remaining: 150 miles</p>
-        <div className="h-2 bg-gray-700 rounded-full mt-2">
-          <div className="h-full w-3/4 bg-green-400 rounded-full" />
-        </div>
-      </div>
+      {/* Bean Bucks Display */}
+      <FullWidthCard>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
+            Bean Bucks: {gameState.tankPoints}
+          </Typography>
+        </CardContent>
+      </FullWidthCard>
 
-      {/* Beanmobile Status */}
-      <div className="bg-gray-800/80 rounded-lg p-4 mb-6">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2">
-            <Battery className="w-5 h-5" />
-            <h3 className="font-bold">BEANMOBILE</h3>
-          </div>
-          <span className="text-green-400">+{beanmobile.boost} HP</span>
-        </div>
-        <div className="h-4 bg-gray-700 rounded-full">
-          <div 
-            className="h-full bg-blue-400 rounded-full transition-all duration-500"
-            style={{ width: `${(beanmobile.currentHP / beanmobile.maxHP) * 100}%` }}
-          />
-        </div>
-        <p className="text-right text-sm mt-1 text-gray-300">
-          {beanmobile.currentHP}/{beanmobile.maxHP}
-        </p>
-      </div>
+      {/* Beanmobile Section */}
+      <FullWidthCard sx={{ backgroundColor: '#ffe4c4' }}>
+        <CardContent>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center', color: '#d2691e' }}>
+            BEANMOBILE
+          </Typography>
+          <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
+            {gameState.tankHealth} / {gameState.maxTankHealth} HP
+          </Typography>
 
-      {/* Player Status Cards */}
-      <div className="space-y-4">
-        {players.map((player) => (
-          <div key={player.role} className="bg-gray-800/80 rounded-lg p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2">
-                <User className="w-5 h-5" />
-                <span className="font-bold">{player.role}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Heart className="w-4 h-4 text-green-400" />
-                <span className="text-green-400">+{player.boost} HP</span>
-              </div>
-            </div>
-            <div className="h-3 bg-gray-700 rounded-full">
-              <div 
-                className="h-full bg-green-400 rounded-full transition-all duration-500"
-                style={{ width: `${(player.currentHP / player.maxHP) * 100}%` }}
-              />
-            </div>
-            <p className="text-right text-sm mt-1 text-gray-300">
-              {player.currentHP}/{player.maxHP}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
+          {/* Upgrade Tank Health Buttons */}
+          <Box display="flex" justifyContent="center" gap={2} mt={2}>
+            <Button variant="contained" color="primary">
+              +100 HP (-120 BB)
+            </Button>
+            <Button variant="contained" color="secondary">
+              +200 HP (-200 BB)
+            </Button>
+          </Box>
+        </CardContent>
+      </FullWidthCard>
+
+      {/* Player Stats Section */}
+      <FullWidthCard>
+        <CardContent>
+          <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+            Player Stats
+          </Typography>
+
+          <ScrollContainer>
+            {[...driver, ...backseaters].map((player, index) => (
+              <Card
+                key={index}
+                sx={{
+                  mb: 2,
+                  p: 2,
+                  borderRadius: '12px',
+                  backgroundColor: '#f0f8ff',
+                  boxShadow: '0px 2px 8px rgba(0,0,0,0.1)',
+                }}
+              >
+                <CardContent>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                    {player.name} {player.role === "driver" ? "(Driver)" : ""}
+                  </Typography>
+                  <Typography variant="body2">ATK DMG: {player.attackPower}</Typography>
+                  <Typography variant="body2">KILL COUNT: {player.killCount}</Typography>
+
+                  {/* Upgrade Attack Power Button */}
+                  <Box mt={2}>
+                    <Button variant="contained" color="warning" fullWidth>
+                      Upgrade ATK (-100 BB)
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            ))}
+          </ScrollContainer>
+        </CardContent>
+      </FullWidthCard>
+    </Box>
   );
-};
-
-export default RestStop;
+}
