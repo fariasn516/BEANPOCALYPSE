@@ -11,7 +11,7 @@ Beanpocalypse is a cooperative RPG designed for road trips where players take on
 - **Players spend earned points** at rest stops to upgrade their abilities.
 - **The final boss** is a giant baked bean covered in molasses!
 
-This game blends **driving mechanics, cooperative strategy, and AR-style combat** into a fun road trip adventure. 
+This game blends **driving mechanics and cooperative strategy** into a fun road trip adventure. 
 
 ---
 
@@ -67,9 +67,16 @@ This game blends **driving mechanics, cooperative strategy, and AR-style combat*
 - **Spring Boot**
 - **Node.js & React** 
 
-### 🚀 Running the Backend
+### Running the Backend
 
 ```sh
 cd backend
 ./mvnw clean package
 ./mvnw spring-boot:run
+
+### Running the Frontend
+
+```sh
+cd frontend
+npm install 
+npm start
