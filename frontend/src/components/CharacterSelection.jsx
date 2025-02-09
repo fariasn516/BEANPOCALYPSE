@@ -118,7 +118,7 @@ export default function CharacterSelection() {
   };
 
   const handleStartGame = () => {
-    navigate('/awaiting-game');
+    navigate('/awaiting-battle');
   };
 
   return (
